@@ -7,7 +7,14 @@ $action = $_GET["action"] ?? "";
 $id = (int)($_GET["id"] ?? 0);
 
 if ($action === "add" && $id > 0) {
-    $_SESSION["cart"][$id] = ($_SESSION["cart"][$id] ?? 0) + 1;
+    $addQty = max(1, (int)($_GET["qty"] ?? 1));
+    $stmt = $conn->prepare("SELECT stock FROM products WHERE id=? LIMIT 1");
+    $stmt->bind_param("i", $id); $stmt->execute();
+    $product = $stmt->get_result()->fetch_assoc();
+    if ($product && (int)$product["stock"] > 0) {
+        $current = (int)($_SESSION["cart"][$id] ?? 0);
+        $_SESSION["cart"][$id] = min($current + $addQty, (int)$product["stock"]);
+    }
     header("Location: cart.php");
     exit;
 }
