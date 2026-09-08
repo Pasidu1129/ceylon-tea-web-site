@@ -9,8 +9,8 @@ if (!$p) { header("Location: products.php"); exit; }
 $pageTitle = $p['name'] . " | Ceylon Tea";
 require "header.php";
 $details = [
-  'Origin' => 'Sri Lanka — Ceylon Tea',
-  'Weight' => '250 g',
+  'Origin' => $p['origin'] ?: 'Sri Lanka — Ceylon Tea',
+  'Weight' => $p['weight'] ?: '250 g',
   'Tea Type' => $p['category'],
   'Best For' => 'Daily tea, gifting & relaxing moments'
 ];
@@ -40,6 +40,6 @@ $details = [
 </section>
 <section class="section detail-extra">
   <div class="detail-panel"><h2>Tasting Notes</h2><p><?php echo htmlspecialchars($p['tasting_notes'] ?? 'A smooth aroma, balanced character and a satisfying finish.'); ?></p></div>
-  <div class="detail-panel"><h2>Brewing Guide</h2><p>Use 1–2 teaspoons per cup. Add hot water and steep for 3–5 minutes. Adjust strength to your preference.</p></div>
+  <div class="detail-panel"><h2>Brewing Guide</h2><p><?php echo htmlspecialchars($p['brewing_guide'] ?? 'Use 1–2 teaspoons per cup. Steep for 3–5 minutes. Adjust strength to your preference.'); ?></p></div>
 </section>
 <?php require "footer.php"; ?>

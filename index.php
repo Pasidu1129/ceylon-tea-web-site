@@ -37,6 +37,8 @@ require "header.php";
     </div>
 </section>
 
+<section class="home-luxury-strip"><div><span class="gold-kicker">THE CEYLON NOIR EXPERIENCE</span><h2>Find Your Signature Cup</h2><p>Filter our collection by tea type, flavour and price to discover your next favourite.</p></div><a class="gold-btn" href="products.php">EXPLORE ALL TEAS →</a></section>
+
 <section class="section">
     <div class="section-title">
         <h2>🍃 FEATURED PRODUCTS 🍃</h2>
@@ -47,14 +49,14 @@ require "header.php";
         $result = $conn->query("SELECT * FROM products WHERE featured=1 ORDER BY id LIMIT 4");
         while ($p = $result->fetch_assoc()):
         ?>
-        <article class="product-card">
-            <img src="images/<?php echo htmlspecialchars($p['image']); ?>" alt="<?php echo htmlspecialchars($p['name']); ?>">
+        <article class="product-card premium-card">
+            <a class="product-image-link" href="product.php?id=<?php echo $p['id']; ?>"><img src="images/<?php echo htmlspecialchars($p['image']); ?>" alt="<?php echo htmlspecialchars($p['name']); ?>"></a>
             <div class="product-info">
                 <h3><?php echo htmlspecialchars($p['name']); ?></h3>
                 <p><?php echo htmlspecialchars($p['description']); ?></p>
                 <div class="product-bottom">
                     <strong>Rs. <?php echo number_format($p['price'], 2); ?></strong>
-                    <a class="small-btn" href="cart.php?action=add&id=<?php echo $p['id']; ?>">🛒 ADD TO CART</a>
+                    <a class="gold-btn mini" href="product.php?id=<?php echo $p['id']; ?>">VIEW DETAILS</a>
                 </div>
             </div>
         </article>
