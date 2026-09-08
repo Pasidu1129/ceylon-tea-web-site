@@ -5,18 +5,28 @@ require "header.php";
 <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-        <p class="eyebrow">100% PURE CEYLON TEA</p>
-        <h1>The Art of a Perfect Cup</h1>
-        <p>Discover carefully selected Ceylon tea powders with a rich aroma, refined flavour and the character of Sri Lanka.</p>
-        <a class="btn" href="products.php">EXPLORE COLLECTION →</a>
+        <p class="eyebrow">PREMIUM CEYLON</p>
+        <h1>TEA POWDER</h1>
+        <p>Experience the rich taste, natural aroma and exceptional quality of 100% Pure Ceylon Tea.</p>
+        <a class="btn" href="products.php">SHOP NOW →</a>
     </div>
 </section>
 
 <section class="section">
-    <div class="section-title"><h2>Shop by Category</h2><p>Find the tea that matches your taste.</p></div>
+    <div class="section-title">
+        <h2>🍃 SHOP BY CATEGORY 🍃</h2>
+        <p>Explore our premium tea collection</p>
+    </div>
     <div class="categories">
         <?php
-        $cats = [["black-tea.jpg","BLACK TEA"],["green-tea.jpg","GREEN TEA"],["ginger-tea.jpg","GINGER TEA"],["cinnamon-tea.jpg","CINNAMON TEA"],["herbal-tea.jpg","HERBAL TEA"],["premium-tea.jpg","PREMIUM TEA"]];
+        $cats = [
+            ["black-tea.jpg","BLACK TEA"],
+            ["green-tea.jpg","GREEN TEA"],
+            ["ginger-tea.jpg","GINGER TEA"],
+            ["cinnamon-tea.jpg","CINNAMON TEA"],
+            ["herbal-tea.jpg","HERBAL TEA"],
+            ["premium-tea.jpg","PREMIUM TEA"]
+        ];
         foreach ($cats as $c):
         ?>
         <a class="category-card" href="products.php?category=<?php echo urlencode($c[1]); ?>">
@@ -28,7 +38,10 @@ require "header.php";
 </section>
 
 <section class="section">
-    <div class="section-title"><h2>Signature Collection</h2><p>Premium blends selected for everyday luxury.</p></div>
+    <div class="section-title">
+        <h2>🍃 FEATURED PRODUCTS 🍃</h2>
+        <p>Our popular premium tea powder products</p>
+    </div>
     <div class="products">
         <?php
         $result = $conn->query("SELECT * FROM products WHERE featured=1 ORDER BY id LIMIT 4");
@@ -37,12 +50,11 @@ require "header.php";
         <article class="product-card">
             <img src="images/<?php echo htmlspecialchars($p['image']); ?>" alt="<?php echo htmlspecialchars($p['name']); ?>">
             <div class="product-info">
-                <span class="tag"><?php echo htmlspecialchars($p['category']); ?></span>
                 <h3><?php echo htmlspecialchars($p['name']); ?></h3>
                 <p><?php echo htmlspecialchars($p['description']); ?></p>
                 <div class="product-bottom">
                     <strong>Rs. <?php echo number_format($p['price'], 2); ?></strong>
-                    <a class="small-btn" href="cart.php?action=add&id=<?php echo $p['id']; ?>">ADD TO CART</a>
+                    <a class="small-btn" href="cart.php?action=add&id=<?php echo $p['id']; ?>">🛒 ADD TO CART</a>
                 </div>
             </div>
         </article>
@@ -51,12 +63,15 @@ require "header.php";
 </section>
 
 <section class="why-us">
-    <div class="section-title"><h2>Why Ceylon Tea?</h2><p>A refined shopping experience from leaf to doorstep.</p></div>
+    <div class="section-title">
+        <h2>WHY CHOOSE CEYLON TEA?</h2>
+        <p>Quality and freshness in every cup</p>
+    </div>
     <div class="features">
-        <div class="feature"><span>✦</span><h3>PURE CEYLON QUALITY</h3><p>Selected tea products inspired by Sri Lanka's tea heritage.</p></div>
-        <div class="feature"><span>◇</span><h3>FRESH PACKAGING</h3><p>Carefully packed to preserve aroma and flavour.</p></div>
-        <div class="feature"><span>→</span><h3>RELIABLE DELIVERY</h3><p>Simple ordering and convenient doorstep delivery.</p></div>
-        <div class="feature"><span>✓</span><h3>SECURE SHOPPING</h3><p>Protected accounts and a clear checkout experience.</p></div>
+        <div class="feature"><span>🌱</span><h3>100% PURE & NATURAL</h3><p>Carefully selected quality tea leaves.</p></div>
+        <div class="feature"><span>🎁</span><h3>FRESH & SAFE PACKAGING</h3><p>Packed to maintain freshness and aroma.</p></div>
+        <div class="feature"><span>🚚</span><h3>FAST & RELIABLE DELIVERY</h3><p>Quick and safe doorstep delivery.</p></div>
+        <div class="feature"><span>🔒</span><h3>SECURE SHOPPING</h3><p>A simple and secure shopping experience.</p></div>
     </div>
 </section>
 <?php require "footer.php"; ?>

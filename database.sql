@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS products (
     price DECIMAL(10,2) NOT NULL,
     image VARCHAR(150) NOT NULL,
     featured TINYINT(1) DEFAULT 0,
+    stock INT NOT NULL DEFAULT 50,
+    tasting_notes TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -43,10 +45,10 @@ CREATE TABLE IF NOT EXISTS order_items (
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
-INSERT INTO products (name, category, description, price, image, featured) VALUES
-('Premium Black Tea','BLACK TEA','Strong flavour and rich aroma for a perfect tea experience.',850.00,'product-black.jpg',1),
-('Green Tea Powder','GREEN TEA','Refreshing green tea made from natural tea leaves.',950.00,'product-green.jpg',1),
-('Ginger Tea Powder','GINGER TEA','Aromatic tea with natural ginger flavour.',900.00,'product-ginger.jpg',1),
-('Cinnamon Tea Powder','CINNAMON TEA','Smooth and tasty cinnamon tea with a delightful flavour.',920.00,'product-cinnamon.jpg',1),
-('Herbal Tea','HERBAL TEA','A refreshing herbal tea blend.',880.00,'herbal-tea.jpg',0),
-('Premium Ceylon Tea','PREMIUM TEA','Selected premium Ceylon tea powder.',1200.00,'premium-tea.jpg',0);
+INSERT INTO products (name, category, description, price, image, featured, stock, tasting_notes) VALUES
+('Premium Black Tea','BLACK TEA','Strong flavour and rich aroma for a perfect tea experience.',850.00,'product-black.jpg',1,50,'Bold aroma with a rich, smooth character and classic Ceylon finish.'),
+('Green Tea Powder','GREEN TEA','Refreshing green tea made from natural tea leaves.',950.00,'product-green.jpg',1,45,'Fresh, light and naturally refreshing with a clean finish.'),
+('Ginger Tea Powder','GINGER TEA','Aromatic tea with natural ginger flavour.',900.00,'product-ginger.jpg',1,40,'Warm ginger aroma with a bright and comforting finish.'),
+('Cinnamon Tea Powder','CINNAMON TEA','Smooth and tasty cinnamon tea with a delightful flavour.',920.00,'product-cinnamon.jpg',1,35,'Sweet spice notes with a warm cinnamon aroma.'),
+('Herbal Tea','HERBAL TEA','A refreshing herbal tea blend.',880.00,'herbal-tea.jpg',0,30,'Gentle herbal aroma with a clean, refreshing character.'),
+('Premium Ceylon Tea','PREMIUM TEA','Selected premium Ceylon tea powder.',1200.00,'premium-tea.jpg',0,25,'Elegant aroma and balanced depth from selected Ceylon tea leaves.');
