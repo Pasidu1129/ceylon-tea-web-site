@@ -1,73 +1,44 @@
-CEYLON NOIR - WEEK 07 PAYHERE SANDBOX VERSION
-================================================
+CEYLON NOIR - WEEK 06 E-BUSINESS SYSTEMS
 
-This version includes Week 07 Payment Gateway Integration requirements:
-- Customer name, email, phone and city
-- Shipping and billing checkout form
-- Order item summary and LKR total
-- PayHere Sandbox form POST
-- Mandatory server-side MD5 hash
-- Pay Now button
-- Return and cancel pages
-- PayHere notification endpoint with md5sig verification
-- Payment/order status storage
-- Cash on Delivery remains available
-- Existing Week 06 authentication, profile, admin and cart features retained
+TECHNOLOGY
+PHP, MySQL, HTML, CSS, JavaScript, XAMPP
 
-IMPORTANT PAYHERE SETUP
------------------------
-1. Open your PayHere Sandbox account.
-2. Go to Integrations.
-3. Add localhost as the Domain for the local lab.
-4. Copy your Sandbox Merchant ID and Merchant Secret.
-5. Open config.php and replace:
-   YOUR_SANDBOX_MERCHANT_ID
-   YOUR_SANDBOX_MERCHANT_SECRET
-6. Set PAYHERE_BASE_URL to the exact XAMPP URL used for the project.
-7. Set PAYHERE_NOTIFY_URL to a publicly reachable HTTPS URL for payhere_notify.php.
-
-Example local URL:
-http://localhost/Ceylon_Tea_Website/
-
-PAYHERE HASH
-------------
-The project generates the mandatory hash on the PHP server:
-UPPERCASE(MD5(merchant_id + order_id + amount + currency + UPPERCASE(MD5(merchant_secret))))
-The amount is formatted to exactly two decimals and currency is LKR.
-
-NOTIFICATION LIMITATION ON LOCALHOST
-------------------------------------
-PayHere documentation states that notify_url must be publicly accessible and payment notifications cannot be tested directly on localhost. Therefore:
-- the checkout/redirect/hash flow can be demonstrated locally through the Sandbox;
-- final server-to-server payment status updates require a public URL for payhere_notify.php.
-Do not mark a payment as paid based only on the browser return page.
-
-WEEK 07 TEST FLOW
------------------
-1. Start Apache and MySQL in XAMPP.
-2. Import database.sql into phpMyAdmin.
-3. Register/login to the website.
-4. Add tea products to the cart.
-5. Open Checkout.
-6. Enter phone, shipping address, city and billing address.
-7. Select PayHere Sandbox - Online Payment.
-8. Click Pay Now.
-9. Confirm that the browser is sent to sandbox.payhere.lk/pay/checkout.
-10. Use the test credentials supplied in the Week 07 lecture note.
-11. Verify the return page and, when a public notify endpoint is available, verify that the database payment_status is updated from the verified callback.
-
-SECURITY
---------
-- Card numbers/CVV are not collected or stored by this website.
-- Merchant Secret is kept in PHP server-side config and is never sent as a form field.
-- The checkout hash is generated server-side.
-- notify_url verifies PayHere's md5sig before updating an order.
-- The order amount is checked against the stored order total before status update.
-- User ID is validated before inserting an order to avoid the previous foreign-key session error.
+WEEK 06 FEATURES
+1. User registration with email validation and password complexity rules.
+2. Passwords are hashed using bcrypt (PHP PASSWORD_BCRYPT).
+3. Generic login error prevents user enumeration.
+4. Secure PHP session with HttpOnly, SameSite and conditional Secure cookie settings.
+5. User profile dashboard with name, phone, shipping address and billing address.
+6. Shipping and billing addresses are encrypted at rest with AES-256-CBC.
+7. Secure password change with current-password re-verification.
+8. Protected profile and checkout routes.
+9. Logout destroys the session and clears the session cookie.
+10. Guest cart remains in the PHP session when a user authenticates.
+11. JSON API endpoints: POST /api/register.php, POST /api/login.php, GET/POST /api/profile.php.
+12. Separate Admin role with full access to dashboard, products/stock, orders and user roles.
+13. Normal users have store, cart, checkout and profile access; no admin dashboard access.
 
 ADMIN LOGIN
------------
-Email: admin@ceylonnoir.lk
+Email/Username: admin@ceylonnoir.lk
 Password: Admin@123
 
-This is a university sandbox project. Use PayHere Sandbox only for testing.
+IMPORTANT: Change the administrator password after first setup.
+
+DATABASE SETUP
+1. Start Apache and MySQL in XAMPP.
+2. Copy Ceylon_Tea_Website into C:\xampp\htdocs\
+3. Open phpMyAdmin.
+4. Import database.sql. It creates the ceylon_tea database and sample products.
+5. Open http://localhost/Ceylon_Tea_Website/
+
+WEEK 06 DOCUMENTATION COVERAGE
+- Registration validation and feedback
+- bcrypt password hashing
+- Session management and cookie safety
+- Login generic errors
+- Protected routes and logout
+- Profile and address management
+- Password change with identity re-verification
+- Admin/User access separation
+- API endpoints
+- Cart state persistence

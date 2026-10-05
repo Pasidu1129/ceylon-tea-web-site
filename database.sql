@@ -61,17 +61,10 @@ CREATE TABLE products (
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
-    customer_name VARCHAR(100) NOT NULL,
-    email VARCHAR(150) NOT NULL,
     total DECIMAL(10,2) NOT NULL,
     address TEXT NOT NULL,
-    billing_address TEXT NOT NULL,
-    city VARCHAR(100) NOT NULL,
     phone VARCHAR(30) NOT NULL,
     status VARCHAR(30) DEFAULT 'Pending',
-    payment_method VARCHAR(40) DEFAULT 'Cash on Delivery',
-    payment_status VARCHAR(30) DEFAULT 'Pending',
-    payment_reference VARCHAR(100) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_orders_user
